@@ -10,7 +10,7 @@
 # Commands:
 #   None
 
-gcloud = require 'gcloud'
+Datastore = require '@google-cloud/datastore'
 
 Memcached = require 'memcached'
 memcachedAddr = process.env.MEMCACHE_ADDR or
@@ -76,9 +76,7 @@ cache =
 module.exports = (robot)->
   KIND = process.env.DATASTORE_KIND or "hubot"
   projectId = process.env.GCLOUD_PROJECT or process.env.GAE_LONG_APP_ID
-  datastore = gcloud
-    projectId: projectId
-  .datastore()
+  datastore = Datastore({projectId: projectId})
 
   robot.brain.setAutoSave false
 
